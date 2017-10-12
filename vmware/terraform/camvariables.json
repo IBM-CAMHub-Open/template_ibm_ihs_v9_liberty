@@ -103,6 +103,17 @@
       "group_name": "virtualmachine"
     },
     {
+      "name": "IHSLiberty9Node01_domain",
+      "type": "string",
+      "description": "Domain Name of virtual machine",
+      "hidden": false,
+      "label": "Domain Name - IHSLiberty9Node01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "IHSLiberty9Node01_ihs_java_version",
       "type": "string",
       "description": "The Java version to be used with IBM HTTP Server",

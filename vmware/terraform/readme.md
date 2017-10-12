@@ -1,4 +1,4 @@
-# Template - IBM HTTP Server V9 Liberty ready on a single VM
+# Template - IBM HTTP Server V9 Liberty ready on a single virtual machine
 Template Version - 1.0
 
 ## Description
@@ -38,8 +38,9 @@ IBM SDK, Java Technology Edition V8<br>
 ### Usage and Special Notes
 
 1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>
-2. IBM Knowledge Center for IBM HTTP Server 9.0.0.x - https://www.ibm.com/support/knowledgecenter/en/SSEQTJ_9.0.0/com.ibm.websphere.ihs.doc/ihs/welcome_ihs.html<br>
-3. IBM Support Portal - https://www.ibm.com/support/home/  <br>
+2. Detailed system requirements for IBM HTTP Server 9 - <a href=\"https://www.ibm.com/software/reports/compatibility/clarity/index.html\" target=\"_blank\">https://www.ibm.com/software/reports/compatibility/clarity/index.html</a><br>
+3. IBM Knowledge Center for IBM HTTP Server 9 - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSEQTJ_9.0.0\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSEQTJ_9.0.0</a><br>
+4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>
 <br>
 
 
