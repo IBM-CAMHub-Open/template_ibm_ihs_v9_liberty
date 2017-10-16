@@ -3,7 +3,7 @@ Template Version - 1.0
 
 ## Description
 
-This template will create a IBM HTTP Server V9.0.0.x on a single VM, ready for use with WebSpher Liberty Server<br>
+This template deploys IBM HTTP Server V9 on a single virtual machine ready for use with WebSpher Liberty Server.<br>
 
 ## Features
 
@@ -20,6 +20,7 @@ This template will create a IBM HTTP Server V9.0.0.x on a single VM, ready for u
 Red Hat Enterprise Linux 7<br>
 Red Hat Enterprise Linux 6<br>
 Ubuntu 16.04<br>
+Ubuntu 14.04<br>
 <br>
 ### Topology
 
@@ -33,7 +34,7 @@ IBM SDK, Java Technology Edition V8<br>
 <br>
 ### Default Virtual Machine Settings
 
- vCPU = 2, Memory = 4GB, Storage = 25GB<br>
+ vCPU 2, Memory (GB) 4<br>
 <br>
 ### Usage and Special Notes
 

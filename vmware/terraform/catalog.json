@@ -1,6 +1,6 @@
 {
     "name": "IBM HTTP Server V9 Liberty ready on a single virtual machine - VMware vSphere",
-    "description": "This template will create a IBM HTTP Server V9.0.0.x on a single VM, ready for use with WebSpher Liberty Server",
+    "description": "This template deploys IBM HTTP Server V9 on a single virtual machine ready for use with WebSpher Liberty Server.",
     "version": "1.0",
     "imageUrl": "",
     "image": "",
@@ -25,7 +25,7 @@
     "metadata": {
       "displayName": "IBM HTTP Server V9 Liberty ready on a single virtual machine",
       "providerDisplayName": "VMware vSphere",
-      "longDescription": "This template will create a IBM HTTP Server V9.0.0.x on a single VM, ready for use with WebSpher Liberty Server",
+      "longDescription": "This template deploys IBM HTTP Server V9 on a single virtual machine ready for use with WebSpher Liberty Server.",
       "bullets": [{
     "title": "Clouds",
     "description": " VMware<br>"},
@@ -34,7 +34,7 @@
     "description": "1.0<br>"},
 {
     "title": "Operating Systems Supported",
-    "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04<br>"},
+    "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04<br>Ubuntu 14.04<br>"},
 {
     "title": "Topology",
     "description": "1 virtual machine:<br> IBM HTTP Server instance<br>"},
@@ -43,7 +43,7 @@
     "description": "IBM HTTP Server for WebSphere Application Server V9<br>IBM SDK, Java Technology Edition V8<br>"},
 {
     "title": "Default Virtual Machine Settings",
-    "description": " vCPU = 2, Memory = 4GB, Storage = 25GB<br>"},
+    "description": " vCPU 2, Memory (GB) 4<br>"},
 {
     "title": "Usage and Special Notes",
     "description": "1. The user is responsible for obtaining appropriate software licenses and downloads prior to template deployment.<br>2. Detailed system requirements for IBM HTTP Server 9 - <a href=\"https://www.ibm.com/software/reports/compatibility/clarity/index.html\" target=\"_blank\">https://www.ibm.com/software/reports/compatibility/clarity/index.html</a><br>3. IBM Knowledge Center for IBM HTTP Server 9 - <a href=\"https://www.ibm.com/support/knowledgecenter/en/SSEQTJ_9.0.0\" target=\"_blank\">https://www.ibm.com/support/knowledgecenter/en/SSEQTJ_9.0.0</a><br>4. IBM Support Portal - <a href=\"https://www.ibm.com/support/home/\" target=\"_blank\">https://www.ibm.com/support/home/</a><br>"}
