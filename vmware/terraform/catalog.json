@@ -1,7 +1,7 @@
 {
     "name": "IBM HTTP Server V9 Liberty ready on a single virtual machine - VMware vSphere",
     "description": "This template deploys IBM HTTP Server V9 on a single virtual machine ready for use with WebSpher Liberty Server.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",
@@ -31,7 +31,7 @@
     "description": " VMware<br>"},
 {
     "title": "Template Version",
-    "description": "1.0.0<br>"},
+    "description": "1.0.1<br>"},
 {
     "title": "Operating Systems Supported",
     "description": "Red Hat Enterprise Linux 7<br>Red Hat Enterprise Linux 6<br>Ubuntu 16.04<br>Ubuntu 14.04<br>"},
