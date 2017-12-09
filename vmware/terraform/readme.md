@@ -33,7 +33,7 @@ IBM SDK, Java Technology Edition V8<br>
 <br>
 ### Default Virtual Machine Settings
 
- vCPU = 2, Memory = 4GB, Storage = 25GB<br>
+ vCPU 2, Memory (GB) 4<br>
 <br>
 ### Usage and Special Notes
 
@@ -93,7 +93,7 @@ The following table describes the nodes and relevant software component deployed
     <th>Description</th>
   </tr>
   <tr>
-    <td>IHSLiberty9Node01</code></td>
+    <td>IHSNode01</code></td>
     <td>ihs-liberty-nonadmin</code></td>
     <td>IHS frontend for WAS Liberty, nonAdmin install mode</code></td>
   </tr>

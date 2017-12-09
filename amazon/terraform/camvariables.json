@@ -12,10 +12,6 @@
       "label": "Cloud Input Variables"
     },
     {
-      "name": "virtualmachine",
-      "label": "Virtual Machine Input Variables"
-    },
-    {
       "name": "ssh_keys",
       "label": "SSH Keys"
     },
@@ -24,8 +20,12 @@
       "label": "Environment"
     },
     {
-      "name": "ihsliberty9node01",
-      "label": "IHSLiberty9Node01"
+      "name": "ihsnode01",
+      "label": "IHSNode01"
+    },
+    {
+      "name": "virtualmachine",
+      "label": "Virtual Machine Input Variables"
     }
   ],
   "output_groups": [
@@ -47,12 +47,95 @@
       "group_name": "environment"
     },
     {
-      "name": "IHSLiberty9Node01_root_block_device_delete_on_termination",
+      "name": "aws_ami_owner_id",
+      "type": "string",
+      "description": "AWS AMI Owner ID",
+      "default": "309956199498",
+      "hidden": false,
+      "label": "AWS AMI Owner ID",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "aws_region",
+      "type": "string",
+      "description": "AWS Region Name",
+      "default": "us-east-1",
+      "hidden": false,
+      "label": "AWS Region Name",
+      "secured": false,
+      "options": [
+        {
+          "value": "us-east-1",
+          "label": "US East (N. Virginia)",
+          "default": true
+        },
+        {
+          "value": "us-east-2",
+          "label": "US East (Ohio)"
+        },
+        {
+          "value": "us-west-1",
+          "label": "US West (N. California)"
+        },
+        {
+          "value": "us-west-2",
+          "label": "US West (Oregon)"
+        },
+        {
+          "value": "ca-central-1",
+          "label": "Canada (Central)"
+        },
+        {
+          "value": "eu-west-1",
+          "label": "EU (Ireland)"
+        },
+        {
+          "value": "eu-central-1",
+          "label": "EU (Frankfurt)"
+        },
+        {
+          "value": "eu-west-2",
+          "label": "EU (London)"
+        },
+        {
+          "value": "ap-northeast-1",
+          "label": "Asia Pacific (Tokyo)"
+        },
+        {
+          "value": "ap-northeast-2",
+          "label": "Asia Pacific (Seoul)"
+        },
+        {
+          "value": "ap-southeast-1",
+          "label": "Asia Pacific (Singapore)"
+        },
+        {
+          "value": "ap-southeast-2",
+          "label": "Asia Pacific (Sydney)"
+        },
+        {
+          "value": "ap-south-1",
+          "label": "Asia Pacific (Mumbai)"
+        },
+        {
+          "value": "sa-east-1",
+          "label": "South America (São Paulo)"
+        }
+      ],
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "IHSNode01_root_block_device_delete_on_termination",
       "type": "string",
       "description": "AWS Root Block Device Delete on Termination",
       "default": "true",
       "hidden": false,
-      "label": "AWS Root Block Device Delete on Termination - IHSLiberty9Node01",
+      "label": "AWS Root Block Device Delete on Termination",
       "secured": false,
       "options": [
         {
@@ -67,29 +150,27 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "cloud"
     },
     {
-      "name": "IHSLiberty9Node01_root_block_device_volume_size",
+      "name": "IHSNode01_root_block_device_volume_size",
       "type": "string",
       "description": "AWS Root Block Device Volume Size",
-      "default": 25,
+      "default": 100,
       "hidden": false,
-      "label": "AWS Root Block Device Volume Size - IHSLiberty9Node01",
+      "label": "AWS Root Block Device Volume Size",
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "cloud"
     },
     {
-      "name": "IHSLiberty9Node01_root_block_device_volume_type",
+      "name": "IHSNode01_root_block_device_volume_type",
       "type": "string",
       "description": "AWS Root Block Device Volume Type",
       "default": "gp2",
       "hidden": false,
-      "label": "AWS Root Block Device Volume Type - IHSLiberty9Node01",
+      "label": "AWS Root Block Device Volume Type",
       "secured": false,
       "options": [
         {
@@ -112,28 +193,48 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "cloud"
     },
     {
-      "name": "IHSLiberty9Node01_subnet_name",
+      "name": "aws_sg_camc_name",
       "type": "string",
-      "description": "AWS Subnet Name",
+      "description": "AWS Security Group Name",
       "hidden": false,
-      "label": "AWS Subnet Name - IHSLiberty9Node01",
+      "label": "AWS Security Group Name",
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "cloud"
     },
     {
-      "name": "IHSLiberty9Node01_associate_public_ip_address",
+      "name": "IHSNode01_subnet_name",
       "type": "string",
-      "description": "Assign a public IP",
+      "description": "AWS Subnet Name",
+      "hidden": false,
+      "label": "AWS Subnet Name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "aws_vpc_name",
+      "type": "string",
+      "description": "AWS VPC Name",
+      "hidden": false,
+      "label": "AWS VPC Name",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "cloud"
+    },
+    {
+      "name": "IHSNode01_associate_public_ip_address",
+      "type": "string",
+      "description": "AWS assign a public IP to instance",
       "default": "true",
       "hidden": false,
-      "label": "Assign a public IP - IHSLiberty9Node01",
+      "label": "AWS assign a public IP to instance",
       "secured": false,
       "options": [
         {
@@ -148,172 +249,171 @@
       ],
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "cloud"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_java_version",
+      "name": "IHSNode01_ihs_java_version",
       "type": "string",
       "description": "The Java version to be used with IBM HTTP Server",
       "default": "8.0.4.70",
       "hidden": true,
-      "label": "IBM HTTP Server Java version - IHSLiberty9Node01",
+      "label": "IBM HTTP Server Java version - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_os_users_ihs_shell",
+      "name": "IHSNode01_ihs_os_users_ihs_shell",
       "type": "string",
       "description": "Location of the IBM HTTP Server operating system user shell",
       "default": "/sbin/nologin",
       "hidden": true,
-      "label": "IBM HTTP Server OS user shell - IHSLiberty9Node01",
+      "label": "IBM HTTP Server OS user shell - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_admin_server_enabled",
+      "name": "IHSNode01_ihs_admin_server_enabled",
       "type": "string",
       "description": "IBM HTTP Server Admin Server Enable(true/false)",
       "default": "false",
       "hidden": true,
-      "label": "IBM HTTP Server admin server enabled - IHSLiberty9Node01",
+      "label": "IBM HTTP Server admin server enabled - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_version",
+      "name": "IHSNode01_ihs_version",
       "type": "string",
       "description": "The version of IBM HTTP Server to install",
       "default": "9.0.0.4",
       "hidden": false,
-      "label": "IBM HTTP Server install version - IHSLiberty9Node01",
+      "label": "IBM HTTP Server install version - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_install_dir",
+      "name": "IHSNode01_ihs_install_dir",
       "type": "string",
       "description": "The directory to install IBM HTTP Server",
       "default": "/opt/IBM/HTTPServer",
       "hidden": false,
-      "label": "IBM HTTP Server installation directory - IHSLiberty9Node01",
+      "label": "IBM HTTP Server installation directory - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_install_mode",
+      "name": "IHSNode01_ihs_install_mode",
       "type": "string",
       "description": "The mode of installation for IBM HTTP Server",
       "default": "nonAdmin",
       "hidden": true,
-      "label": "IBM HTTP Server installation mode - IHSLiberty9Node01",
+      "label": "IBM HTTP Server installation mode - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_plugin_enabled",
+      "name": "IHSNode01_ihs_plugin_enabled",
       "type": "string",
       "description": "IBM HTTP Server Plugin Enabled",
       "default": "true",
       "hidden": true,
-      "label": "IBM HTTP Server plugin enabled - IHSLiberty9Node01",
+      "label": "IBM HTTP Server plugin enabled - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_plugin_was_webserver_name",
+      "name": "IHSNode01_ihs_plugin_was_webserver_name",
       "type": "string",
       "description": "IBM HTTP Server Plugin Hostname, normally the FQDN",
       "default": "webserver1",
       "hidden": false,
-      "label": "IBM HTTP Server plugin hostname - IHSLiberty9Node01",
+      "label": "IBM HTTP Server plugin hostname - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_plugin_install_dir",
+      "name": "IHSNode01_ihs_plugin_install_dir",
       "type": "string",
       "description": "IBM HTTP Server Plugin Installation Direcrtory",
       "default": "/opt/IBM/WebSphere/Plugins",
       "hidden": false,
-      "label": "IBM HTTP Server plugin installation directory - IHSLiberty9Node01",
+      "label": "IBM HTTP Server plugin installation directory - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_port",
+      "name": "IHSNode01_ihs_port",
       "type": "string",
       "description": "The IBM HTTP Server default port for HTTP requests",
       "default": "8080",
       "hidden": true,
-      "label": "IBM HTTP Server port - IHSLiberty9Node01",
+      "label": "IBM HTTP Server port - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_os_users_ihs_gid",
+      "name": "IHSNode01_ihs_os_users_ihs_gid",
       "type": "string",
       "description": "The group name for the IBM HTTP Server user",
       "default": "ihsgrp",
       "hidden": true,
-      "label": "IBM HTTP Server user group name - IHSLiberty9Node01",
+      "label": "IBM HTTP Server user group name - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_os_users_ihs_name",
+      "name": "IHSNode01_ihs_os_users_ihs_name",
       "type": "string",
       "description": "The username for IBM HTTP Server",
       "default": "ihssrv",
       "hidden": false,
-      "label": "IBM HTTP Server username - IHSLiberty9Node01",
+      "label": "IBM HTTP Server username - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
-      "name": "IHSLiberty9Node01_ihs_java_legacy",
+      "name": "IHSNode01_ihs_java_legacy",
       "type": "string",
       "description": "The Java version to be used with IBM HTTP Server version 8.5.5",
       "default": "java8",
       "hidden": false,
-      "label": "IBM HTTP Server v855 Java version - IHSLiberty9Node01",
+      "label": "IBM HTTP Server v855 Java version - IHSNode01",
       "secured": false,
       "options": [
         {
@@ -329,7 +429,7 @@
       "required": true,
       "immutable": false,
       "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "ihsnode01"
     },
     {
       "name": "ibm_pm_access_token",
@@ -428,74 +528,50 @@
       "group_name": "environment"
     },
     {
-      "name": "IHSLiberty9Node01-flavor",
+      "name": "IHSNode01-flavor",
       "type": "string",
-      "description": "IHSLiberty9Node01 Flavor",
-      "default": "t2.small",
+      "description": "IHSNode01 Flavor",
+      "default": "t2.medium",
       "hidden": false,
-      "label": "IHSLiberty9Node01 Flavor",
+      "label": "IHSNode01 Flavor",
       "secured": false,
       "required": true,
       "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
+      "group_name": "virtualmachine"
     },
     {
-      "name": "IHSLiberty9Node01-image",
+      "name": "IHSNode01-image",
       "type": "string",
       "description": "Operating system image id / template that should be used when creating the virtual image",
       "default": "RHEL-7.4_HVM_GA",
       "hidden": false,
-      "label": "Operating System ID / Template - IHSLiberty9Node01",
+      "label": "Operating System ID / Template - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
     },
     {
-      "name": "IHSLiberty9Node01-os_admin_user",
+      "name": "IHSNode01-os_admin_user",
       "type": "string",
       "description": "Name of the admin user account in the virtual machine that will be accessed via SSH",
       "hidden": false,
-      "label": "Operating System Username - IHSLiberty9Node01",
+      "label": "Operating System Username - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
     },
     {
-      "name": "IHSLiberty9Node01-name",
+      "name": "IHSNode01-name",
       "type": "string",
       "description": "Short hostname of virtual machine",
       "hidden": false,
-      "label": "Short hostname - IHSLiberty9Node01",
+      "label": "Short hostname - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
-    },
-    {
-      "name": "IHSLiberty9Node01-mgmt-network-public",
-      "type": "string",
-      "description": "Expose and use public IP of virtual machine for internal communication",
-      "default": "true",
-      "hidden": false,
-      "label": "Use Public Management Network - IHSLiberty9Node01",
-      "secured": false,
-      "options": [
-        {
-          "value": false,
-          "label": false
-        },
-        {
-          "value": true,
-          "label": true
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsliberty9node01"
     },
     {
       "name": "ibm_pm_private_ssh_key",
@@ -522,109 +598,26 @@
       "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key_name}"
     },
     {
-      "name": "aws_ami_owner_id",
+      "name": "IHSNode01-mgmt-network-public",
       "type": "string",
-      "description": "The AMI Owner ID",
-      "default": "309956199498",
+      "description": "Expose and use public IP of virtual machine for internal communication",
+      "default": "true",
       "hidden": false,
-      "label": "The AMI Owner ID",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "aws_region",
-      "type": "string",
-      "description": "The aws region",
-      "default": "us-east-1",
-      "hidden": false,
-      "label": "The aws region",
+      "label": "Use Public Management Network",
       "secured": false,
       "options": [
         {
-          "value": "us-east-1",
-          "label": "US East (N. Virginia)",
-          "default": true
+          "value": false,
+          "label": false
         },
         {
-          "value": "us-east-2",
-          "label": "US East (Ohio)"
-        },
-        {
-          "value": "us-west-1",
-          "label": "US West (N. California)"
-        },
-        {
-          "value": "us-west-2",
-          "label": "US West (Oregon)"
-        },
-        {
-          "value": "ca-central-1",
-          "label": "Canada (Central)"
-        },
-        {
-          "value": "eu-west-1",
-          "label": "EU (Ireland)"
-        },
-        {
-          "value": "eu-central-1",
-          "label": "EU (Frankfurt)"
-        },
-        {
-          "value": "eu-west-2",
-          "label": "EU (London)"
-        },
-        {
-          "value": "ap-northeast-1",
-          "label": "Asia Pacific (Tokyo)"
-        },
-        {
-          "value": "ap-northeast-2",
-          "label": "Asia Pacific (Seoul)"
-        },
-        {
-          "value": "ap-southeast-1",
-          "label": "Asia Pacific (Singapore)"
-        },
-        {
-          "value": "ap-southeast-2",
-          "label": "Asia Pacific (Sydney)"
-        },
-        {
-          "value": "ap-south-1",
-          "label": "Asia Pacific (Mumbai)"
-        },
-        {
-          "value": "sa-east-1",
-          "label": "South America (São Paulo)"
+          "value": true,
+          "label": true
         }
       ],
       "required": true,
       "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "aws_sg_camc_name",
-      "type": "string",
-      "description": "The name of the aws security group for automation content",
-      "hidden": false,
-      "label": "The name of the aws security group for automation content",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "aws_vpc_name",
-      "type": "string",
-      "description": "The name of the aws vpc",
-      "hidden": false,
-      "label": "The name of the aws vpc",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "cloud"
+      "group_name": "virtualmachine"
     },
     {
       "name": "user_public_ssh_key",
@@ -636,6 +629,7 @@
       "secured": false,
       "required": true,
       "immutable": false,
+      "immutable_after_create": true,
       "group_name": "ssh_keys"
     },
     {
@@ -653,7 +647,7 @@
   ],
   "template_output_params": [
     {
-      "name": "IHSLiberty9Node01_ip",
+      "name": "IHSNode01_ip",
       "label": "IP Addresss",
       "description": "The Public and Public IP address",
       "type": "string",
@@ -662,7 +656,7 @@
       "group_name": "content_template_output"
     },
     {
-      "name": "IHSLiberty9Node01_name",
+      "name": "IHSNode01_name",
       "label": "Node Name",
       "description": "The chef node name",
       "type": "string",
@@ -671,7 +665,7 @@
       "group_name": "content_template_output"
     },
     {
-      "name": "IHSLiberty9Node01_roles",
+      "name": "IHSNode01_roles",
       "label": "Chef Roles",
       "description": "The chef roles deployed",
       "type": "string",
