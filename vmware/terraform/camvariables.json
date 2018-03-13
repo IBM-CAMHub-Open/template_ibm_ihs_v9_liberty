@@ -1,11 +1,11 @@
 {
-  "input_namespaces": [
+  "input_datatypes": [
     {
       "name": "advanced_content_runtime_chef",
       "label": "Advanced Content Runtime"
     }
   ],
-  "output_namespace": "content_template_output",
+  "output_datatype": "content_template_output",
   "input_groups": [
     {
       "name": "cloud",
@@ -18,6 +18,10 @@
     {
       "name": "environment",
       "label": "Environment"
+    },
+    {
+      "name": "ihs-liberty-nonadmin",
+      "label": "ihs-liberty-nonadmin"
     },
     {
       "name": "ihsnode01",
@@ -35,6 +39,17 @@
     }
   ],
   "template_input_params": [
+    {
+      "name": "ibm_stack_id",
+      "type": "string",
+      "description": "A unique stack id.",
+      "hidden": true,
+      "label": "A unique stack id.",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "environment"
+    },
     {
       "name": "ibm_stack_name",
       "type": "string",
@@ -118,7 +133,7 @@
       "name": "IHSNode01_ihs_java_version",
       "type": "string",
       "description": "The Java version to be used with IBM HTTP Server",
-      "default": "8.0.4.70",
+      "default": "8.0.50.7",
       "hidden": true,
       "label": "IBM HTTP Server Java version - IHSNode01",
       "secured": false,
@@ -157,7 +172,7 @@
       "name": "IHSNode01_ihs_version",
       "type": "string",
       "description": "The version of IBM HTTP Server to install",
-      "default": "9.0.0.4",
+      "default": "9.0.0.6",
       "hidden": false,
       "label": "IBM HTTP Server install version - IHSNode01",
       "secured": false,
@@ -327,6 +342,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_im_repo}"
     },
@@ -352,6 +368,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -359,11 +376,12 @@
       "type": "string",
       "description": "IBM Software Repo Password",
       "hidden": true,
-      "label": "IBM Software Repo Password",
+      "label": "IBM Software Repo Password - ihs-liberty-nonadmin",
       "secured": true,
       "required": true,
       "immutable": true,
-      "group_name": "environment",
+      "immutable_after_create": true,
+      "group_name": "ihs-liberty-nonadmin",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
     },
     {
@@ -375,6 +393,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo}"
     },
@@ -388,6 +407,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
@@ -448,6 +468,18 @@
       "default": "${advanced_content_runtime_chef.ibm_pm_public_ssh_key}"
     },
     {
+      "name": "IHSNode01_root_disk_size",
+      "type": "string",
+      "description": "Size of template disk volume. Should be equal to template's disk size",
+      "default": "100",
+      "hidden": false,
+      "label": "Root Disk Size - IHSNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
       "name": "IHSNode01-name",
       "type": "string",
       "description": "Short hostname of virtual machine",
@@ -459,79 +491,12 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "IHSNode01_root_disk_controller_type",
-      "type": "string",
-      "description": "Type of template disk controller",
-      "default": "scsi",
-      "hidden": false,
-      "label": "Template Disk Controller - IHSNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "scsi",
-          "label": "scsi",
-          "default": "true"
-        },
-        {
-          "value": "scsi-lsi-parallel",
-          "label": "scsi-lsi-parallel"
-        },
-        {
-          "value": "scsi-buslogic",
-          "label": "scsi-buslogic"
-        },
-        {
-          "value": "scsi-paravirtual",
-          "label": "scsi-paravirtual"
-        },
-        {
-          "value": "scsi-isi-sas",
-          "label": "scsi-isi-sas"
-        },
-        {
-          "value": "ide",
-          "label": "ide"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
       "name": "IHSNode01_root_disk_datastore",
       "type": "string",
       "description": "Data store or storage cluster name for target virtual machine's disks",
       "hidden": false,
       "label": "Template Disk Datastore - IHSNode01",
       "secured": false,
-      "required": true,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
-      "name": "IHSNode01_root_disk_type",
-      "type": "string",
-      "description": "Type of template disk volume",
-      "default": "eager_zeroed",
-      "hidden": false,
-      "label": "Template Disk Type - IHSNode01",
-      "secured": false,
-      "options": [
-        {
-          "value": "eager_zeroed",
-          "label": "Thick Provision Eager Zeroed",
-          "default": "true"
-        },
-        {
-          "value": "lazy",
-          "label": "Thick Provision Lazy Zeroed"
-        },
-        {
-          "value": "thin",
-          "label": "Thin Provision",
-          "group_name": "virtualmachine"
-        }
-      ],
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"
@@ -611,7 +576,7 @@
       "hidden": false,
       "label": "vSphere Cluster - IHSNode01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -622,7 +587,7 @@
       "hidden": false,
       "label": "vSphere Datacenter - IHSNode01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -633,7 +598,7 @@
       "hidden": false,
       "label": "vSphere Folder Name - IHSNode01",
       "secured": false,
-      "required": true,
+      "required": false,
       "immutable": false,
       "group_name": "cloud"
     },
@@ -656,6 +621,17 @@
           "default": "e1000"
         }
       ],
+      "required": true,
+      "immutable": false,
+      "group_name": "virtualmachine"
+    },
+    {
+      "name": "IHSNode01_resource_pool",
+      "type": "string",
+      "description": "Target vSphere Resource Pool to host the virtual machine",
+      "hidden": false,
+      "label": "vSphere Resource Pool - IHSNode01",
+      "secured": false,
       "required": true,
       "immutable": false,
       "group_name": "virtualmachine"

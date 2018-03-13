@@ -1,15 +1,23 @@
 # =================================================================
-# Licensed Materials - Property of IBM
-# 5737-E67
-# @ Copyright IBM Corporation 2016, 2017 All Rights Reserved
-# US Government Users Restricted Rights - Use, duplication or disclosure
-# restricted by GSA ADP Schedule Contract with IBM Corp.
+# Copyright 2017 IBM Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 # =================================================================
 
 # This is a terraform generated template generated from ibm_ihs_v9_liberty
 
 ##############################################################
-# Keys - CAMC (public/private) & optional User Key (public) 
+# Keys - CAMC (public/private) & optional User Key (public)
 ##############################################################
 variable "ibm_pm_public_ssh_key_name" {
   description = "Public CAMC SSH key name used to connect to the virtual guest."
@@ -22,10 +30,15 @@ variable "ibm_pm_private_ssh_key" {
 variable "user_public_ssh_key" {
   type = "string"
   description = "User defined public SSH key used to connect to the virtual machine. The format must be in openSSH."
+  default = "None"
+}
+
+variable "ibm_stack_id" {
+  description = "A unique stack id."
 }
 
 ##############################################################
-# Define the ibm provider 
+# Define the ibm provider
 ##############################################################
 #define the ibm provider
 provider "ibm" {
@@ -36,24 +49,16 @@ provider "camc" {
   version = "~> 0.1"
 }
 
-provider "random" {
-  version = "~> 1.0"
-}
-
 ##############################################################
-# Reference public key in Devices>Manage>SSH Keys in SL console) 
+# Reference public key in Devices>Manage>SSH Keys in SL console)
 ##############################################################
 data "ibm_compute_ssh_key" "ibm_pm_public_key" {
   label = "${var.ibm_pm_public_ssh_key_name}"
   most_recent = "true"
 }
 
-resource "random_id" "stack_id" {
-  byte_length = "16"
-}
-
 ##############################################################
-# Define pattern variables 
+# Define pattern variables
 ##############################################################
 ##### unique stack name #####
 variable "ibm_stack_name" {
@@ -78,6 +83,7 @@ variable "ibm_im_repo_password" {
 variable "ibm_im_repo_user" {
   type = "string"
   description = "IBM Software  Installation Manager Repository username"
+  default = "repouser"
 }
 
 #Variable : ibm_pm_access_token
@@ -98,16 +104,19 @@ variable "ibm_sw_repo" {
   description = "IBM Software Repo Root (https://<hostname>:<port>)"
 }
 
-#Variable : ibm_sw_repo_password
-variable "ibm_sw_repo_password" {
-  type = "string"
-  description = "IBM Software Repo Password"
-}
-
 #Variable : ibm_sw_repo_user
 variable "ibm_sw_repo_user" {
   type = "string"
   description = "IBM Software Repo Username"
+  default = "repouser"
+}
+
+
+##### ihs-liberty-nonadmin variables #####
+#Variable : ibm_sw_repo_password
+variable "ibm_sw_repo_password" {
+  type = "string"
+  description = "IBM Software Repo Password"
 }
 
 
@@ -116,6 +125,7 @@ variable "ibm_sw_repo_user" {
 variable "IHSNode01-image" {
   type = "string"
   description = "Operating system image id / template that should be used when creating the virtual image"
+  default = "REDHAT_7_64"
 }
 
 #Variable : IHSNode01-name
@@ -134,78 +144,91 @@ variable "IHSNode01-os_admin_user" {
 variable "IHSNode01_ihs_admin_server_enabled" {
   type = "string"
   description = "IBM HTTP Server Admin Server Enable(true/false)"
+  default = "false"
 }
 
 #Variable : IHSNode01_ihs_install_dir
 variable "IHSNode01_ihs_install_dir" {
   type = "string"
   description = "The directory to install IBM HTTP Server"
+  default = "/opt/IBM/HTTPServer"
 }
 
 #Variable : IHSNode01_ihs_install_mode
 variable "IHSNode01_ihs_install_mode" {
   type = "string"
   description = "The mode of installation for IBM HTTP Server"
+  default = "nonAdmin"
 }
 
 #Variable : IHSNode01_ihs_java_legacy
 variable "IHSNode01_ihs_java_legacy" {
   type = "string"
   description = "The Java version to be used with IBM HTTP Server version 8.5.5"
+  default = "java8"
 }
 
 #Variable : IHSNode01_ihs_java_version
 variable "IHSNode01_ihs_java_version" {
   type = "string"
   description = "The Java version to be used with IBM HTTP Server"
+  default = "8.0.50.7"
 }
 
 #Variable : IHSNode01_ihs_os_users_ihs_gid
 variable "IHSNode01_ihs_os_users_ihs_gid" {
   type = "string"
   description = "The group name for the IBM HTTP Server user"
+  default = "ihsgrp"
 }
 
 #Variable : IHSNode01_ihs_os_users_ihs_name
 variable "IHSNode01_ihs_os_users_ihs_name" {
   type = "string"
   description = "The username for IBM HTTP Server"
+  default = "ihssrv"
 }
 
 #Variable : IHSNode01_ihs_os_users_ihs_shell
 variable "IHSNode01_ihs_os_users_ihs_shell" {
   type = "string"
   description = "Location of the IBM HTTP Server operating system user shell"
+  default = "/sbin/nologin"
 }
 
 #Variable : IHSNode01_ihs_plugin_enabled
 variable "IHSNode01_ihs_plugin_enabled" {
   type = "string"
   description = "IBM HTTP Server Plugin Enabled"
+  default = "true"
 }
 
 #Variable : IHSNode01_ihs_plugin_install_dir
 variable "IHSNode01_ihs_plugin_install_dir" {
   type = "string"
   description = "IBM HTTP Server Plugin Installation Direcrtory"
+  default = "/opt/IBM/WebSphere/Plugins"
 }
 
 #Variable : IHSNode01_ihs_plugin_was_webserver_name
 variable "IHSNode01_ihs_plugin_was_webserver_name" {
   type = "string"
   description = "IBM HTTP Server Plugin Hostname, normally the FQDN"
+  default = "webserver1"
 }
 
 #Variable : IHSNode01_ihs_port
 variable "IHSNode01_ihs_port" {
   type = "string"
   description = "The IBM HTTP Server default port for HTTP requests"
+  default = "8080"
 }
 
 #Variable : IHSNode01_ihs_version
 variable "IHSNode01_ihs_version" {
   type = "string"
   description = "The version of IBM HTTP Server to install"
+  default = "9.0.0.6"
 }
 
 
@@ -214,6 +237,7 @@ variable "IHSNode01_ihs_version" {
 variable "IHSNode01-mgmt-network-public" {
   type = "string"
   description = "Expose and use public IP of virtual machine for internal communication"
+  default = "true"
 }
 
 
@@ -221,6 +245,7 @@ variable "IHSNode01-mgmt-network-public" {
 ##### domain name #####
 variable "runtime_domain" {
   description = "domain name"
+  default = "cam.ibm.com"
 }
 
 
@@ -233,6 +258,7 @@ variable "runtime_domain" {
 variable "IHSNode01_datacenter" {
   type = "string"
   description = "IBMCloud datacenter where infrastructure resources will be deployed"
+  default = "dal05"
 }
 
 
@@ -240,6 +266,7 @@ variable "IHSNode01_datacenter" {
 variable "IHSNode01_private_network_only" {
   type = "string"
   description = "Provision the virtual machine with only private IP"
+  default = "false"
 }
 
 
@@ -247,6 +274,7 @@ variable "IHSNode01_private_network_only" {
 variable "IHSNode01_number_of_cores" {
   type = "string"
   description = "Number of CPU cores, which is required to be a positive Integer"
+  default = "2"
 }
 
 
@@ -254,6 +282,7 @@ variable "IHSNode01_number_of_cores" {
 variable "IHSNode01_memory" {
   type = "string"
   description = "Amount of Memory (MBs), which is required to be one or more times of 1024"
+  default = "4096"
 }
 
 
@@ -261,6 +290,7 @@ variable "IHSNode01_memory" {
 variable "IHSNode01_network_speed" {
   type = "string"
   description = "Bandwidth of network communication applied to the virtual machine"
+  default = "1000"
 }
 
 
@@ -268,6 +298,7 @@ variable "IHSNode01_network_speed" {
 variable "IHSNode01_hourly_billing" {
   type = "string"
   description = "Billing cycle: hourly billed or monthly billed"
+  default = "true"
 }
 
 
@@ -275,6 +306,7 @@ variable "IHSNode01_hourly_billing" {
 variable "IHSNode01_dedicated_acct_host_only" {
   type = "string"
   description = "Shared or dedicated host, where dedicated host usually means higher performance and cost"
+  default = "false"
 }
 
 
@@ -282,11 +314,13 @@ variable "IHSNode01_dedicated_acct_host_only" {
 variable "IHSNode01_local_disk" {
   type = "string"
   description = "User local disk or SAN disk"
+  default = "false"
 }
 
 variable "IHSNode01_root_disk_size" {
   type = "string"
   description = "Root Disk Size - IHSNode01"
+  default = "100"
 }
 
 resource "ibm_compute_vm_instance" "IHSNode01" {
@@ -313,11 +347,20 @@ resource "ibm_compute_vm_instance" "IHSNode01" {
     destination = "IHSNode01_add_ssh_key.sh"
     content     = <<EOF
 # =================================================================
-# Licensed Materials - Property of IBM
-# 5737-E67
-# @ Copyright IBM Corporation 2016, 2017 All Rights Reserved
-# US Government Users Restricted Rights - Use, duplication or disclosure
-# restricted by GSA ADP Schedule Contract with IBM Corp.
+# Copyright 2017 IBM Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+#	you may not use this file except in compliance with the License.
+#	You may obtain a copy of the License at
+#
+#	  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+#	WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 # =================================================================
 #!/bin/bash
 
@@ -378,17 +421,17 @@ resource "camc_bootstrap" "IHSNode01_chef_bootstrap_comp" {
   data = <<EOT
 {
   "os_admin_user": "${var.IHSNode01-os_admin_user}",
-  "stack_id": "${random_id.stack_id.hex}",
+  "stack_id": "${var.ibm_stack_id}",
   "environment_name": "_default",
   "host_ip": "${var.IHSNode01-mgmt-network-public == "false" ? ibm_compute_vm_instance.IHSNode01.ipv4_address_private : ibm_compute_vm_instance.IHSNode01.ipv4_address}",
   "node_name": "${var.IHSNode01-name}",
   "node_attributes": {
     "ibm_internal": {
-      "stack_id": "${random_id.stack_id.hex}",
+      "stack_id": "${var.ibm_stack_id}",
       "stack_name": "${var.ibm_stack_name}",
       "vault": {
         "item": "secrets",
-        "name": "${random_id.stack_id.hex}"
+        "name": "${var.ibm_stack_id}"
       }
     }
   }
@@ -411,7 +454,7 @@ resource "camc_softwaredeploy" "IHSNode01_ihs-liberty-nonadmin" {
   data = <<EOT
 {
   "os_admin_user": "${var.IHSNode01-os_admin_user}",
-  "stack_id": "${random_id.stack_id.hex}",
+  "stack_id": "${var.ibm_stack_id}",
   "environment_name": "_default",
   "host_ip": "${var.IHSNode01-mgmt-network-public == "false" ? ibm_compute_vm_instance.IHSNode01.ipv4_address_private : ibm_compute_vm_instance.IHSNode01.ipv4_address}",
   "node_name": "${var.IHSNode01-name}",
@@ -460,7 +503,7 @@ resource "camc_softwaredeploy" "IHSNode01_ihs-liberty-nonadmin" {
         "sw_repo_password": "${var.ibm_sw_repo_password}"
       }
     },
-    "vault": "${random_id.stack_id.hex}"
+    "vault": "${var.ibm_stack_id}"
   }
 }
 EOT
@@ -481,7 +524,7 @@ resource "camc_vaultitem" "VaultItem" {
   "vault_content": {
     "item": "secrets",
     "values": {},
-    "vault": "${random_id.stack_id.hex}"
+    "vault": "${var.ibm_stack_id}"
   }
 }
 EOT
@@ -500,6 +543,5 @@ output "IHSNode01_roles" {
 }
 
 output "stack_id" {
-  value = "${random_id.stack_id.hex}"
+  value = "${var.ibm_stack_id}"
 }
-

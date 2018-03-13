@@ -1,11 +1,11 @@
 {
-  "input_namespaces": [
+  "input_datatypes": [
     {
       "name": "advanced_content_runtime_chef",
       "label": "Advanced Content Runtime"
     }
   ],
-  "output_namespace": "content_template_output",
+  "output_datatype": "content_template_output",
   "input_groups": [
     {
       "name": "cloud",
@@ -18,6 +18,10 @@
     {
       "name": "environment",
       "label": "Environment"
+    },
+    {
+      "name": "ihs-liberty-nonadmin",
+      "label": "ihs-liberty-nonadmin"
     },
     {
       "name": "ihsnode01",
@@ -35,6 +39,17 @@
     }
   ],
   "template_input_params": [
+    {
+      "name": "ibm_stack_id",
+      "type": "string",
+      "description": "A unique stack id.",
+      "hidden": true,
+      "label": "A unique stack id.",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "group_name": "environment"
+    },
     {
       "name": "ibm_stack_name",
       "type": "string",
@@ -156,7 +171,7 @@
       "name": "IHSNode01_root_block_device_volume_size",
       "type": "string",
       "description": "AWS Root Block Device Volume Size",
-      "default": 100,
+      "default": "100",
       "hidden": false,
       "label": "AWS Root Block Device Volume Size",
       "secured": false,
@@ -252,10 +267,98 @@
       "group_name": "cloud"
     },
     {
+      "name": "IHSNode01_ihs_version",
+      "type": "string",
+      "description": "The version of IBM HTTP Server to install",
+      "default": "9.0.0.6",
+      "hidden": false,
+      "label": "IBM HTTP Server install version - IHSNode01",
+      "secured": false,
+      "required": true,
+      "immutable": false,
+      "immutable_after_create": true,
+      "group_name": "ihsnode01"
+    },
+    {
+      "name": "ibm_pm_access_token",
+      "type": "string",
+      "description": "IBM Pattern Manager Access Token",
+      "hidden": true,
+      "label": "IBM Pattern Manager Access Token",
+      "secured": true,
+      "required": true,
+      "immutable": true,
+      "group_name": "environment",
+      "default": "${advanced_content_runtime_chef.ibm_pm_access_token}"
+    },
+    {
+      "name": "ibm_pm_service",
+      "type": "string",
+      "description": "IBM Pattern Manager Service",
+      "hidden": true,
+      "label": "IBM Pattern Manager Service",
+      "secured": false,
+      "required": true,
+      "immutable": true,
+      "group_name": "environment",
+      "default": "${advanced_content_runtime_chef.ibm_pm_service}"
+    },
+    {
+      "name": "ibm_im_repo",
+      "type": "string",
+      "description": "IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) ",
+      "hidden": true,
+      "label": "IBM Software Installation Manager Repository",
+      "secured": false,
+      "required": true,
+      "immutable": true,
+      "immutable_after_create": true,
+      "group_name": "environment",
+      "default": "${advanced_content_runtime_chef.ibm_im_repo}"
+    },
+    {
+      "name": "ibm_im_repo_password",
+      "type": "string",
+      "description": "IBM Software  Installation Manager Repository Password",
+      "hidden": true,
+      "label": "IBM Software Installation Manager Repository Password",
+      "secured": true,
+      "required": true,
+      "immutable": true,
+      "group_name": "environment",
+      "default": "${advanced_content_runtime_chef.ibm_im_repo_password}"
+    },
+    {
+      "name": "ibm_im_repo_user",
+      "type": "string",
+      "description": "IBM Software  Installation Manager Repository username",
+      "default": "${advanced_content_runtime_chef.ibm_im_repo_user}",
+      "hidden": true,
+      "label": "IBM Software Installation Manager Repository Username",
+      "secured": false,
+      "required": true,
+      "immutable": true,
+      "immutable_after_create": true,
+      "group_name": "environment"
+    },
+    {
+      "name": "ibm_sw_repo_password",
+      "type": "string",
+      "description": "IBM Software Repo Password",
+      "hidden": true,
+      "label": "IBM Software Repo Password - ihs-liberty-nonadmin",
+      "secured": true,
+      "required": true,
+      "immutable": true,
+      "immutable_after_create": true,
+      "group_name": "ihs-liberty-nonadmin",
+      "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
+    },
+    {
       "name": "IHSNode01_ihs_java_version",
       "type": "string",
       "description": "The Java version to be used with IBM HTTP Server",
-      "default": "8.0.4.70",
+      "default": "8.0.50.7",
       "hidden": true,
       "label": "IBM HTTP Server Java version - IHSNode01",
       "secured": false,
@@ -284,19 +387,6 @@
       "default": "false",
       "hidden": true,
       "label": "IBM HTTP Server admin server enabled - IHSNode01",
-      "secured": false,
-      "required": true,
-      "immutable": false,
-      "immutable_after_create": true,
-      "group_name": "ihsnode01"
-    },
-    {
-      "name": "IHSNode01_ihs_version",
-      "type": "string",
-      "description": "The version of IBM HTTP Server to install",
-      "default": "9.0.0.4",
-      "hidden": false,
-      "label": "IBM HTTP Server install version - IHSNode01",
       "secured": false,
       "required": true,
       "immutable": false,
@@ -432,78 +522,6 @@
       "group_name": "ihsnode01"
     },
     {
-      "name": "ibm_pm_access_token",
-      "type": "string",
-      "description": "IBM Pattern Manager Access Token",
-      "hidden": true,
-      "label": "IBM Pattern Manager Access Token",
-      "secured": true,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_pm_access_token}"
-    },
-    {
-      "name": "ibm_pm_service",
-      "type": "string",
-      "description": "IBM Pattern Manager Service",
-      "hidden": true,
-      "label": "IBM Pattern Manager Service",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_pm_service}"
-    },
-    {
-      "name": "ibm_im_repo",
-      "type": "string",
-      "description": "IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) ",
-      "hidden": true,
-      "label": "IBM Software Installation Manager Repository",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_im_repo}"
-    },
-    {
-      "name": "ibm_im_repo_password",
-      "type": "string",
-      "description": "IBM Software  Installation Manager Repository Password",
-      "hidden": true,
-      "label": "IBM Software Installation Manager Repository Password",
-      "secured": true,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_im_repo_password}"
-    },
-    {
-      "name": "ibm_im_repo_user",
-      "type": "string",
-      "description": "IBM Software  Installation Manager Repository username",
-      "default": "${advanced_content_runtime_chef.ibm_im_repo_user}",
-      "hidden": true,
-      "label": "IBM Software Installation Manager Repository Username",
-      "secured": false,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment"
-    },
-    {
-      "name": "ibm_sw_repo_password",
-      "type": "string",
-      "description": "IBM Software Repo Password",
-      "hidden": true,
-      "label": "IBM Software Repo Password",
-      "secured": true,
-      "required": true,
-      "immutable": true,
-      "group_name": "environment",
-      "default": "${advanced_content_runtime_chef.ibm_sw_repo_password}"
-    },
-    {
       "name": "ibm_sw_repo",
       "type": "string",
       "description": "IBM Software Repo Root (https://<hostname>:<port>)",
@@ -512,6 +530,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment",
       "default": "${advanced_content_runtime_chef.ibm_sw_repo}"
     },
@@ -525,6 +544,7 @@
       "secured": false,
       "required": true,
       "immutable": true,
+      "immutable_after_create": true,
       "group_name": "environment"
     },
     {
