@@ -290,7 +290,7 @@
       "type": "string",
       "description": "The Java version to be used with IBM HTTP Server version 8.5.5",
       "default": "java8",
-      "hidden": false,
+      "hidden": true,
       "label": "IBM HTTP Server v855 Java version - IHSNode01",
       "secured": false,
       "options": [
