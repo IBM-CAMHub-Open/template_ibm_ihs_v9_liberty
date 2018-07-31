@@ -65,6 +65,7 @@ Amazon EC2
 - IBM HTTP Server  8.5.5.12
 - IBM HTTP Server  9.0.0.4
 - IBM HTTP Server  9.0.0.6
+- IBM HTTP Server  9.0.0.8
 
 
 *Note, these represent base versions only, explicit fixpacks may also be added.*

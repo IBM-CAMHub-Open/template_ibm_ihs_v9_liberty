@@ -209,7 +209,7 @@ variable "IHSNode01_ihs_java_legacy" {
 variable "IHSNode01_ihs_java_version" {
   type = "string"
   description = "The Java version to be used with IBM HTTP Server"
-  default = "8.0.50.7"
+  default = "8.0.5.17"
 }
 
 #Variable : IHSNode01_ihs_os_users_ihs_gid
@@ -265,7 +265,7 @@ variable "IHSNode01_ihs_port" {
 variable "IHSNode01_ihs_version" {
   type = "string"
   description = "The version of IBM HTTP Server to install"
-  default = "9.0.0.6"
+  default = "9.0.0.8"
 }
 
 
