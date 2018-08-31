@@ -323,6 +323,7 @@ variable "IHSNode01_root_disk_size" {
   default = "100"
 }
 
+
 resource "ibm_compute_vm_instance" "IHSNode01" {
   hostname = "${var.IHSNode01-name}"
   os_reference_code = "${var.IHSNode01-image}"
@@ -341,6 +342,12 @@ resource "ibm_compute_vm_instance" "IHSNode01" {
   connection {
     user = "${var.IHSNode01-os_admin_user}"
     private_key = "${base64decode(var.ibm_pm_private_ssh_key)}"
+    bastion_host        = "${var.bastion_host}"
+    bastion_user        = "${var.bastion_user}"
+    bastion_private_key = "${ length(var.bastion_private_key) > 0 ? base64decode(var.bastion_private_key) : var.bastion_private_key}"
+    bastion_port        = "${var.bastion_port}"
+    bastion_host_key    = "${var.bastion_host_key}"
+    bastion_password    = "${var.bastion_password}"    
   }
 
   provisioner "file" {

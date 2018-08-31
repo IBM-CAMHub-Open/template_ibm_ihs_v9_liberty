@@ -1,5 +1,5 @@
 # Template - IBM HTTP Server V9 Liberty ready on a single VM
-Template Version - 2.0
+Template Version - 2.1
 
 ## Description
 

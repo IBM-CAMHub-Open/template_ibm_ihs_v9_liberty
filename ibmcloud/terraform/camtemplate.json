@@ -1,7 +1,7 @@
 {
     "name": "IBM HTTP Server V9 Liberty ready on a single VM - IBM",
     "description": "This template will create a IBM HTTP Server V9.0.0.x on a single VM, ready for use with WebSphere Liberty Server",
-    "version": "2.0",
+    "version": "2.1",
     "imageUrl": "",
     "image": "",
     "type": "chefcontent",
